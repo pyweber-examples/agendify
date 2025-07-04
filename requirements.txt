@@ -1,0 +1,9 @@
+# Agendify - Task Manager Dependencies
+# Core framework
+pyweber>=0.9.95
+
+# Database management
+manage.sql>=1.0.0
+
+# Additional dependencies (if needed)
+requests>=2.25.0  # Already included in Python standard library for most use cases

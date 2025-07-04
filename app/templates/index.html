@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - Pyweber</title>
+    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Manager</h1>
+            <p>Gerencie suas tarefas com Pyweber</p>
+        </header>
+
+        <!-- Formulário para criar nova task -->
+        <section class="create-task">
+            <h2>Nova Tarefa</h2>
+            <form id="taskForm" method="dialog">
+                <div class="form-group">
+                    <label for="title">Título:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descrição:</label>
+                    <textarea id="description" name="description" rows="2" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="">Selecione...</option>
+                        <option value="pending">Pendente</option>
+                        <option value="sent">Enviado</option>
+                    </select>
+                </div>
+                <button id="btn-create-task" type="submit" class="btn btn-primary">Criar Tarefa</button>
+            </form>
+        </section>
+
+        <!-- Filtros -->
+        <section class="filters">
+            <h2>Filtrar Tarefas</h2>
+            <div class="filter-group">
+                <label for="statusFilter">Filtrar por Status:</label>
+                <select id="statusFilter">
+                    <option value="all">Todos</option>
+                    <option value="pending">Pendente</option>
+                    <option value="sent">Enviado</option>
+                </select>
+                <button type="button" class="btn btn-secondary" id="btn-filtrar">Filtrar</button>
+            </div>
+        </section>
+
+        <!-- Lista de tasks -->
+        <section class="tasks-list">
+            <h2>Suas Tarefas</h2>
+            <div id="tasksContainer">
+                <!-- Tasks serão carregadas aqui -->
+            </div>
+        </section>
+
+        <!-- Modal para editar task -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Editar Tarefa</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="editTaskForm" method="dialog">
+                    <input type="hidden" id="editTaskId">
+
+                    <div class="form-group">
+                        <label for="editTitle">Título:</label>
+                        <input type="text" id="editTitle" name="title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editDescription">Descrição:</label>
+                        <textarea id="editDescription" name="description" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEmail">Email:</label>
+                        <input type="email" id="editEmail" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editStatus">Status:</label>
+                        <select id="editStatus" name="status" required>
+                            <option value="pending">Pendente</option>
+                            <option value="sent">Enviado</option>
+                        </select>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="edit-cancel">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="edit-save">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="to-up">
+        <i class="bi bi-arrow-up-short"></i>
+    </div>
+</body>
+</html>

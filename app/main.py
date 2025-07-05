@@ -18,7 +18,7 @@ def set_tasks(tasks: list[list]):
 
 class TaskCard(pw.Element):
     def __init__(self, id, **kwargs):
-        super().__init__(tag='div', classes=['task-card'], attrs={'data-id': id})
+        super().__init__(tag='div', classes=['task-card'])
         self.id = id
         self.kwargs = kwargs
         self.childs = [
@@ -81,16 +81,10 @@ class TaskCard(pw.Element):
         e.template.querySelector('.modal').style['display'] = 'block'
 
         e.template.querySelector('#editTitle').value = self.kwargs.get('title')
-        e.template.querySelector('#editDescription').content = self.kwargs.get('description')
+        e.template.querySelector('#editDescription').value = self.kwargs.get('description')
         e.template.querySelector('#editEmail').value = self.kwargs.get('email')
+        e.template.querySelector('#editStatus').value = self.kwargs.get('status')
         e.template.querySelector('#editTaskId').value = self.id
-
-        for option in e.template.querySelector('#editStatus').childs:
-            option.value = 'pending' if option.content.lower() == 'pendente' else 'sent'
-            if option.value == self.kwargs.get('status'):
-                option.set_attr('selected', '')
-            else:
-                option.remove_attr('selected')
 
         e.update()
     
@@ -194,12 +188,15 @@ class Home(pw.Template):
                 method='POST',
                 data=data
             )
-        
-        title.value = ''
-        description.value = ''
-        email.value = ''
 
-        self.list_tasks(e)
+        
+            title.value = ''
+            description.value = ''
+            email.value = ''
+
+            self.list_tasks(e)
+
+            e.update()
     
     def list_tasks(self, e: pw.EventHandler):
         container = e.template.querySelector('#tasksContainer') if e else self.querySelector('#tasksContainer')
@@ -239,7 +236,7 @@ def create_task():
         task_id = db.insert_task(title, description, full_date, email, status)
 
         if isinstance(task_id, int):
-            return {'message': f'Task {title} created with id {task_id}', 'status': 'sucess'}
+            return task_id
         else:
             return {'message': f'Error: {task_id}', 'status': 'error'}
     

@@ -7,3 +7,6 @@ manage.sql>=1.0.0
 
 # Additional dependencies (if needed)
 requests>=2.25.0  # Already included in Python standard library for most use cases
+
+uvicorn
+gunicorn
